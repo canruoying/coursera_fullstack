@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+    <head>
+            <title>JavaScript Guessing Game</title>
+            <meta name="author" content="Canruo Ying">
+    </head>
+    <body onload="do_game()">
+        <script>
+            function do_game() {
+                var colors = ["Aqua", "Black", "Blue", "Cyan", "Gold", "Green", "Magenta", "Pink", "Red", "Silver", "Violet", "White", "Yellow"];
+                var colorIndex = Math.floor(Math.random() * colors.length);
+                var targetColor = colors[colorIndex];
+
+                console.log("The correct answer is " + targetColor + ".");
+                var numGuesses = guess(colors, targetColor);
+                alert("Congratulations! You have guessed the color!\n\nIt took you " + numGuesses + " guesses to finish the game!\n\nYou can see the colour in the background.");
+
+                document.body.style.background = targetColor;
+            }
+
+            function guess(colors, targetColor) {
+                var numGuesses = 0;
+                var guess;
+
+                do {
+                    numGuesses++;
+                    guess = prompt("I am thinking of one of these colors:\n\n" + colors.join(", ") + "\n\nWhat color am I thinking of?\n\n(Graders: Please see console log for correct answer)");
+                } while (!check_guess(colors, targetColor, guess))
+
+                return numGuesses;
+            }
+
+            function check_guess(colors, targetColor, guess) {
+                var highOrLow;
+                if (targetColor == guess) {
+                    return true;
+                } else if (!contains(colors, guess)) {
+                    alert("Sorry, I don't recognize your color.\n\nPlease try again.");
+                } else {
+                    if (guess > targetColor) {
+                        highOrLow = "higher";
+                    } else if (guess < targetColor) {
+                        highOrLow = "lower";
+                    }
+                    alert("Sorry, your guess is not correct!\n\nHint: your color is alphabetically " + highOrLow + " than mine.\n\nPlease try again");
+                }
+                return false;
+            }
+
+            function contains(array, element) {
+                for (i = 0; i < array.length; i++) {
+                    if (element == array[i]) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        </script>
+    </body>
+</html>
