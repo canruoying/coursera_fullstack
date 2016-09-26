@@ -32,14 +32,14 @@
 
             function check_guess(colors, targetColor, guess) {
                 var highOrLow;
-                if (targetColor == guess) {
+                if (targetColor.toLowerCase() == guess.toLowerCase()) {
                     return true;
                 } else if (!contains(colors, guess)) {
                     alert("Sorry, I don't recognize your color.\n\nPlease try again.");
                 } else {
-                    if (guess > targetColor) {
+                    if (guess.toLowerCase() > targetColor.toLowerCase()) {
                         highOrLow = "higher";
-                    } else if (guess < targetColor) {
+                    } else if (guess.toLowerCase() < targetColor.toLowerCase()) {
                         highOrLow = "lower";
                     }
                     alert("Sorry, your guess is not correct!\n\nHint: your color is alphabetically " + highOrLow + " than mine.\n\nPlease try again");
@@ -49,7 +49,7 @@
 
             function contains(array, element) {
                 for (i = 0; i < array.length; i++) {
-                    if (element == array[i]) {
+                    if (element.toLowerCase() == array[i].toLowerCase()) {
                         return true;
                     }
                 }

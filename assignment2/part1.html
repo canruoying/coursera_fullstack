@@ -31,7 +31,7 @@
             }
 
             function check_guess(colors, targetColor, guess) {
-                if (targetColor == guess) {
+                if (targetColor.toLowerCase() == guess.toLowerCase()) {
                     return true;
                 } else {
                     return false;
