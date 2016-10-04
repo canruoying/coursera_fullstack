@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Matching Game</title>
+        <style>
+            p {font-size: 15px}
+            img {position: absolute}
+            div {position: absolute; width: 500px; height: 500px}
+            #rightSide {left: 500px; border-left: 1px solid black}
+        </style>
+    </head>
+    <body id="theBody" onload="generateFaces()">
+        <h2>Matching Game<h2>
+        <p>Click on extra smiling face on the left</p>
+        <div id="leftSide"></div>
+        <div id="rightSide"></div>
+        <script>
+            var numberOfFaces = 5;
+            var theLeftSide = document.getElementById("leftSide");
+            var theRightSide = document.getElementById("rightSide");
+            var theBody = document.getElementById("theBody");
+            function generateFaces(){
+                for (var i = 0; i < numberOfFaces; i++) {
+                    var img = document.createElement("img");
+                    var topPosition = Math.random() * 401;
+                    var leftPosition = Math.random() * 401;
+                    console.log(topPosition);
+                    img.src = "smile.png";
+                    img.style.top = topPosition + 'px';
+                    img.style.left = leftPosition + 'px';
+                    theLeftSide.appendChild(img);
+                }
+                var leftSideImages = theLeftSide.cloneNode(true);
+                leftSideImages.removeChild(leftSideImages.lastChild);
+                theRightSide.appendChild(leftSideImages);
+                theLeftSide.lastChild.onclick = nextLevel;
+                theBody.onclick = gameOver;
+            }
+
+            function nextLevel(event) {
+                event.stopPropagation();
+                numberOfFaces += 5;
+                removeAllChildren(theLeftSide);
+                removeAllChildren(theRightSide);
+                generateFaces();
+            }
+
+            function gameOver() {
+                alert("Game Over!");
+                theBody.onclick = null;
+                theLeftSide.lastChild.onclick = null;
+            }
+
+            function removeAllChildren(div) {
+                while (div.firstChild) {
+                    div.removeChild(div.firstChild);
+                }
+            }
+        </script>
+    </body>
+</html>
